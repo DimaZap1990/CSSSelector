@@ -5,9 +5,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CardRegTest {
     private WebDriver driver;
@@ -33,5 +36,12 @@ class CardRegTest {
     @Test
     void shouldTest(){
         driver.get("http://localhost:9999");
+        driver.findElement(By.cssSelector("[type='text']")).sendKeys("Ольга Вениаминовна");
+        driver.findElement(By.cssSelector("[type='tel']")).sendKeys("+79096855050");
+        driver.findElement(By.className("checkbox__box")).click();
+        driver.findElement(By.tagName("button")).click();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText().trim();
+        String excpected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время";
+        assertEquals(excpected,actual);
     }
 }
