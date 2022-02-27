@@ -44,8 +44,7 @@ class ChromeTest {
         driver.findElement(By.cssSelector("[type='tel']")).sendKeys("+79096855050");
         driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.tagName("button")).click();
-        String actual = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText().trim();
-        String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время";
-        assertEquals(expected,actual);
+        String text = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText();
+        assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время",text.trim());
     }
 }
